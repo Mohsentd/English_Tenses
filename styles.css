@@ -9,14 +9,17 @@ body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     line-height: 1.6;
     color: #2d3748;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #f7f9fb;
     min-height: 100vh;
 }
 
 .container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 10px;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
 }
 
 /* Header Styles */
@@ -98,13 +101,38 @@ body {
 
 /* Main Content */
 .main-content {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 40px;
-    margin: 20px 0;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    background: transparent;
+    backdrop-filter: none;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
 }
+
+/* Make inner content flush edge-to-edge on the main page */
+.main-content .container {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    max-width: none;
+}
+
+.main-content .feature-section {
+    padding: 0;
+}
+
+.main-content .table-section {
+    background: transparent;
+    backdrop-filter: none;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* Allow the Tenses Overview table to keep its original rounded corners and shadow */
 
 /* Tenses Grid */
 .tenses-grid {
@@ -277,7 +305,7 @@ body {
 /* Responsive Design */
 @media (max-width: 1200px) {
     .container {
-        padding: 0 15px;
+        padding: 0 10px;
     }
     
     .header-content {
@@ -289,7 +317,7 @@ body {
     }
     
     .main-content {
-        padding: 30px;
+        padding: 0;
     }
 }
 
@@ -313,8 +341,8 @@ body {
     }
     
     .main-content {
-        padding: 20px;
-        margin: 15px 0;
+        padding: 0;
+        margin: 0;
     }
     
     .tense-card {
@@ -350,7 +378,8 @@ body {
     }
     
     .main-content {
-        padding: 15px;
+        padding: 0;
+        margin: 0;
     }
     
     .tense-card {
@@ -411,7 +440,7 @@ body {
 
 /* Dark Theme Styles */
 .dark-theme {
-    background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+    background: #1a202c; /* solid background to avoid gradient darkening on scroll */
     color: #e2e8f0;
 }
 
@@ -429,8 +458,20 @@ body {
 }
 
 .dark-theme .main-content {
-    background: rgba(45, 55, 72, 0.95);
+    background: #2d3748; /* solid to avoid gradient bleed */
     color: #e2e8f0;
+    border: none;
+    border-radius: 0;
+}
+.dark-theme .container {
+    /* Keep consistent 10px gutters in dark mode without visible edge */
+    padding: 0 10px !important; /* override responsive paddings */
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    border-color: transparent;
+    outline: none;
+    box-shadow: none;
 }
 
 .dark-theme .tense-card {
@@ -861,7 +902,7 @@ body {
 
 /* Dark Theme for Table */
 .dark-theme .table-section {
-    background: rgba(45, 55, 72, 0.95);
+    background: rgba(45, 55, 72, 0);
     color: #e2e8f0;
 }
 
@@ -994,3 +1035,329 @@ body {
         font-size: 0.8rem;
     }
 }
+
+/* ===== Merged from advanced-styles.css (scoped, non-conflicting parts) ===== */
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+}
+
+.hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Feature Navigation */
+.feature-nav {
+    background: #f8fafc;
+    padding: 20px 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.feature-tabs {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.feature-tab {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    color: #4a5568;
+}
+
+.feature-tab:hover {
+    background: #ebf8ff;
+    border-color: #3182ce;
+    color: #3182ce;
+}
+
+.feature-tab.active {
+    background: #3182ce;
+    color: white;
+    border-color: #3182ce;
+}
+
+/* Feature Sections */
+.feature-section {
+    display: none;
+    padding: 60px 0;
+    background: #f8fafc !important;
+    min-height: 100vh;
+}
+
+.feature-section.active {
+    display: block;
+}
+
+.feature-section .container {
+    background: transparent;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #2d3748;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #4a5568;
+    font-size: 1.1rem;
+    margin-bottom: 50px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Signal Words */
+.signal-words-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.signal-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.signal-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.signal-card h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #2d3748;
+}
+
+.signal-words {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.signal-word {
+    background: #ebf8ff;
+    color: #3182ce;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    border: 1px solid #bee3f8;
+}
+
+.signal-example {
+    background: #f7fafc;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid #3182ce;
+}
+
+.signal-example p {
+    margin: 0;
+    color: #4a5568;
+    line-height: 1.6;
+}
+
+/* Real-World Examples */
+.example-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.example-category h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: #2d3748;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.example-category h3 i {
+    color: #3182ce;
+}
+
+.example-items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.example-item {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #3182ce;
+}
+
+.example-item .tense-label {
+    background: #3182ce;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+.example-text {
+    font-size: 1.1rem;
+    color: #2d3748;
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+.example-source {
+    font-size: 0.9rem;
+    color: #718096;
+    font-style: italic;
+}
+
+/* Comparison Tables */
+.comparison-tables {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.comparison-table h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #2d3748;
+    text-align: center;
+}
+
+.comparison-table-content {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.comparison-table-content th {
+    background: #3182ce;
+    color: white;
+    padding: 20px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.comparison-table-content td {
+    padding: 20px;
+    border-bottom: 1px solid #e2e8f0;
+    color: #4a5568;
+    line-height: 1.6;
+}
+
+.comparison-table-content tr:last-child td {
+    border-bottom: none;
+}
+
+.comparison-table-content tr:nth-child(even) {
+    background: #f8fafc;
+}
+
+/* Dark Theme additions for merged sections */
+.dark-theme .feature-nav {
+    background: #1a202c;
+    border-bottom-color: #4a5568;
+}
+
+.dark-theme .feature-tab {
+    background: #2d3748;
+    border-color: #4a5568;
+    color: #a0aec0;
+}
+
+.dark-theme .feature-tab:hover {
+    background: #4a5568;
+    color: #63b3ed;
+}
+
+.dark-theme .feature-tab.active {
+    background: #3182ce;
+    color: white;
+}
+
+.dark-theme .section-title {
+    color: #e2e8f0;
+}
+
+.dark-theme .section-subtitle {
+    color: #a0aec0;
+}
+
+.dark-theme .feature-section {
+    background: #1a202c !important;
+}
+
+.dark-theme .signal-card {
+    background: #2d3748;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.dark-theme .signal-card h3 { color: #e2e8f0; }
+.dark-theme .signal-word { background: #2d3748; color: #63b3ed; border-color: #4a5568; }
+.dark-theme .signal-example { background: #1a202c; border-left-color: #63b3ed; }
+.dark-theme .signal-example p { color: #a0aec0; }
+.dark-theme .example-category h3 { color: #e2e8f0; }
+.dark-theme .example-item { background: #2d3748; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); }
+.dark-theme .example-text { color: #e2e8f0; }
+.dark-theme .example-source { color: #a0aec0; }
+.dark-theme .comparison-table-content { background: #2d3748; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); }
+.dark-theme .comparison-table-content th { background: #3182ce; }
+.dark-theme .comparison-table-content td { color: #a0aec0; border-bottom-color: #4a5568; }
+.dark-theme .comparison-table-content tr:nth-child(even) { background: #1a202c; }
+
+/* Responsive merges */
+@media (max-width: 768px) {
+    .hero-title { font-size: 2rem; }
+    .section-title { font-size: 2rem; }
+    .feature-tabs { flex-direction: column; align-items: center; }
+    .feature-tab { width: 100%; max-width: 300px; justify-content: center; }
+    .signal-words-grid { grid-template-columns: 1fr; }
+    .example-categories { grid-template-columns: 1fr; }
+}
+

@@ -282,20 +282,21 @@ function addScrollToTopFunctionality() {
         font-size: 1.2rem;
     `;
     
-    scrollToTopButton.addEventListener('click', function() {
-        const tableSection = document.querySelector('.table-section');
-        if (tableSection) {
-            tableSection.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        } else {
-            // Fallback to scroll to top of page
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+    function getActiveTarget() {
+        const activeSection = document.querySelector('.feature-section.active');
+        if (activeSection) {
+            const sectionTable = activeSection.querySelector('.table-section');
+            return sectionTable || activeSection;
         }
+        return document.body;
+    }
+
+    scrollToTopButton.addEventListener('click', function() {
+        const target = getActiveTarget();
+        target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
     });
     
     scrollToTopButton.addEventListener('mouseenter', function() {
@@ -312,28 +313,26 @@ function addScrollToTopFunctionality() {
     
     // Show/hide button based on scroll position
     function toggleScrollButton() {
-        const tableSection = document.querySelector('.table-section');
-        if (tableSection) {
-            const tableRect = tableSection.getBoundingClientRect();
-            const isTableVisible = tableRect.top < window.innerHeight && tableRect.bottom > 0;
-            
-            if (isTableVisible) {
-                scrollToTopButton.classList.remove('show');
-            } else {
-                scrollToTopButton.classList.add('show');
-            }
+        const target = getActiveTarget();
+        // Compute absolute top of target element
+        const targetTop = target.getBoundingClientRect().top + window.scrollY;
+        const scrolledPast = window.scrollY > targetTop + 100; // threshold within section
+        if (scrolledPast) {
+            scrollToTopButton.classList.add('show');
         } else {
-            // Fallback: show button when scrolled down
-            if (window.scrollY > 300) {
-                scrollToTopButton.classList.add('show');
-            } else {
-                scrollToTopButton.classList.remove('show');
-            }
+            scrollToTopButton.classList.remove('show');
         }
     }
     
     // Listen for scroll events
     window.addEventListener('scroll', toggleScrollButton);
+    // Re-evaluate when switching tabs/sections
+    document.addEventListener('click', function(e) {
+        if (e.target.closest('.feature-tab')) {
+            // Wait a tick for the class change to apply
+            setTimeout(toggleScrollButton, 50);
+        }
+    });
     
     // Initial check
     toggleScrollButton();

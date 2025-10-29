@@ -1,0 +1,17 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.cursor/
+
+# Node (if added later)
+node_modules/
+*.env
+.env*
+
+# Build artifacts (if any are introduced later)
+dist/
+build/
+.tmp/
+.cache/

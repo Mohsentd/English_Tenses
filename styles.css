@@ -1,0 +1,996 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    line-height: 1.6;
+    color: #2d3748;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header Styles */
+.header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    margin: 20px 0;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.header-content {
+    padding: 40px;
+    text-align: center;
+}
+
+.title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.title i {
+    color: #667eea;
+    font-size: 2.5rem;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #718096;
+    font-weight: 400;
+}
+
+/* Search Container */
+.search-container {
+    margin: 30px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.search-box {
+    position: relative;
+    max-width: 500px;
+    width: 100%;
+}
+
+.search-box i {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a0aec0;
+    font-size: 1.1rem;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 15px 20px 15px 50px;
+    border: 2px solid #e2e8f0;
+    border-radius: 50px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+#searchInput:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Main Content */
+.main-content {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    margin: 20px 0;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Tenses Grid */
+.tenses-grid {
+    display: grid;
+    gap: 40px;
+}
+
+.tense-category {
+    margin-bottom: 30px;
+}
+
+.category-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 25px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #667eea;
+    position: relative;
+}
+
+.category-title::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 50px;
+    height: 3px;
+    background: #764ba2;
+}
+
+/* Tense Cards */
+.tense-card {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.tense-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+.tense-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.tense-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.tense-header h3 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.tense-tag {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.tense-structure {
+    background: #f7fafc;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    border-left: 4px solid #667eea;
+}
+
+.tense-structure strong {
+    color: #2d3748;
+    font-weight: 600;
+}
+
+.tense-examples {
+    margin-bottom: 15px;
+}
+
+.tense-examples strong {
+    color: #2d3748;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.tense-examples ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.tense-examples li {
+    background: #f7fafc;
+    padding: 10px 15px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    border-left: 3px solid #48bb78;
+    font-style: italic;
+}
+
+.tense-examples em {
+    color: #667eea;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.tense-usage {
+    background: #edf2f7;
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid #48bb78;
+    margin-bottom: 15px;
+}
+
+.tense-usage strong {
+    color: #2d3748;
+    font-weight: 600;
+}
+
+.tense-notes {
+    background: #fef5e7;
+    padding: 15px;
+    border-radius: 10px;
+    border-left: 4px solid #d69e2e;
+}
+
+.tense-notes strong {
+    color: #2d3748;
+    font-weight: 600;
+}
+
+.tense-notes ul {
+    margin-top: 10px;
+}
+
+.tense-notes li {
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 30px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .header-content {
+        padding: 30px;
+    }
+    
+    .title {
+        font-size: 2.5rem;
+    }
+    
+    .main-content {
+        padding: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        padding: 25px;
+    }
+    
+    .title {
+        font-size: 2rem;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .title i {
+        font-size: 2rem;
+    }
+    
+    .subtitle {
+        font-size: 1rem;
+    }
+    
+    .main-content {
+        padding: 20px;
+        margin: 15px 0;
+    }
+    
+    .tense-card {
+        padding: 20px;
+    }
+    
+    .tense-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .tense-header h3 {
+        font-size: 1.2rem;
+    }
+    
+    .category-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 10px;
+    }
+    
+    .header-content {
+        padding: 20px;
+    }
+    
+    .title {
+        font-size: 1.8rem;
+    }
+    
+    .main-content {
+        padding: 15px;
+    }
+    
+    .tense-card {
+        padding: 15px;
+    }
+    
+    .tense-structure,
+    .tense-usage {
+        padding: 12px;
+    }
+    
+    .tense-examples li {
+        padding: 8px 12px;
+    }
+}
+
+/* Animation for search results */
+.tense-card.hidden {
+    display: none;
+}
+
+.tense-card.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Loading animation */
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #e2e8f0;
+    border-top: 4px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Dark Theme Styles */
+.dark-theme {
+    background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+    color: #e2e8f0;
+}
+
+.dark-theme .header {
+    background: rgba(45, 55, 72, 0.95);
+    color: #e2e8f0;
+}
+
+.dark-theme .title {
+    color: #e2e8f0;
+}
+
+.dark-theme .subtitle {
+    color: #a0aec0;
+}
+
+.dark-theme .main-content {
+    background: rgba(45, 55, 72, 0.95);
+    color: #e2e8f0;
+}
+
+.dark-theme .tense-card {
+    background: #2d3748;
+    border-color: #4a5568;
+    color: #e2e8f0;
+}
+
+.dark-theme .tense-header h3 {
+    color: #e2e8f0;
+}
+
+.dark-theme .tense-structure {
+    background: #4a5568;
+    color: #e2e8f0;
+}
+
+.dark-theme .tense-structure strong {
+    color: #e2e8f0;
+}
+
+.dark-theme .tense-examples strong {
+    color: #e2e8f0;
+}
+
+.dark-theme .tense-examples li {
+    background: #4a5568;
+    color: #e2e8f0;
+}
+
+.dark-theme .tense-usage {
+    background: #4a5568;
+    color: #e2e8f0;
+}
+
+.dark-theme .tense-usage strong {
+    color: #e2e8f0;
+}
+
+.dark-theme .tense-notes {
+    background: #4a5568;
+    color: #e2e8f0;
+}
+
+.dark-theme .tense-notes strong {
+    color: #e2e8f0;
+}
+
+.dark-theme #searchInput {
+    background: rgba(45, 55, 72, 0.95);
+    border-color: #4a5568;
+    color: #e2e8f0;
+}
+
+.dark-theme #searchInput::placeholder {
+    color: #a0aec0;
+}
+
+.dark-theme #searchInput:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+/* Print Styles */
+@media print {
+    body {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .header {
+        background: white !important;
+        box-shadow: none !important;
+        border: 2px solid #000 !important;
+    }
+    
+    .main-content {
+        background: white !important;
+        box-shadow: none !important;
+    }
+    
+    .tense-card {
+        background: white !important;
+        border: 1px solid #000 !important;
+        box-shadow: none !important;
+        break-inside: avoid;
+        margin-bottom: 15px;
+    }
+    
+    .tense-card::before {
+        background: #000 !important;
+    }
+    
+    .theme-toggle,
+    .print-button {
+        display: none !important;
+    }
+    
+    .search-container {
+        display: none !important;
+    }
+    
+    .footer {
+        color: black !important;
+    }
+    
+    .title {
+        color: black !important;
+    }
+    
+    .subtitle {
+        color: #666 !important;
+    }
+    
+    .category-title {
+        color: black !important;
+        border-color: #000 !important;
+    }
+    
+    .tense-header h3 {
+        color: black !important;
+    }
+    
+    .tense-structure,
+    .tense-usage {
+        background: #f5f5f5 !important;
+        border-color: #000 !important;
+    }
+    
+    .tense-examples li {
+        background: #f5f5f5 !important;
+        border-color: #000 !important;
+    }
+}
+
+/* Accessibility Improvements */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .tense-card {
+        border: 2px solid #000;
+    }
+    
+    .tense-card::before {
+        background: #000;
+    }
+    
+    .tense-tag {
+        background: #000;
+        color: #fff;
+    }
+}
+
+/* Focus styles for better accessibility */
+.tense-card:focus,
+.tense-card:focus-within {
+    outline: 3px solid #667eea;
+    outline-offset: 2px;
+}
+
+#searchInput:focus {
+    outline: 3px solid #667eea;
+    outline-offset: 2px;
+}
+
+/* Loading states */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.loading-overlay.dark {
+    background: rgba(45, 55, 72, 0.9);
+}
+
+/* Scroll to top button */
+.scroll-to-top-button {
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.scroll-to-top-button.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-to-top-button:hover {
+    transform: translateY(-2px) scale(1.1) !important;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Dark theme for scroll to top button */
+.dark-theme .scroll-to-top-button {
+    background: linear-gradient(135deg, #4a5568, #2d3748) !important;
+}
+
+.dark-theme .scroll-to-top-button:hover {
+    background: linear-gradient(135deg, #667eea, #764ba2) !important;
+}
+
+/* Table Section Styles */
+.table-section {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 30px;
+    margin: 20px 0;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.table-section-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.table-section-title i {
+    color: #667eea;
+    font-size: 1.5rem;
+}
+
+.table-section-subtitle {
+    color: #718096;
+    font-size: 1rem;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+/* Table Container */
+.table-container {
+    margin-bottom: 20px;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+}
+
+/* Table Styles */
+.tenses-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 15px;
+    overflow: hidden;
+    table-layout: fixed;
+}
+
+.dark-theme .tenses-table {
+    background: transparent;
+}
+
+.tenses-table tbody tr {
+    height: 60px;
+}
+
+.tenses-table thead {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+.tenses-table th {
+    padding: 20px 15px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.1rem;
+    border: none;
+    position: relative;
+}
+
+.corner-cell {
+    background: linear-gradient(135deg, #4a5568, #2d3748) !important;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.time-header {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    position: relative;
+    font-size: 0.9rem;
+}
+
+.time-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.aspect-header {
+    background: linear-gradient(135deg, #4a5568, #2d3748);
+    color: white;
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 25px 15px;
+    text-align: center;
+    border-right: 2px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    height: 60px !important;
+    min-height: 60px !important;
+    max-height: 60px !important;
+    vertical-align: middle;
+    width: 120px;
+    max-width: 120px;
+}
+
+.aspect-header::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.dark-theme .aspect-header {
+    background: linear-gradient(135deg, #2d3748, #1a202c);
+    border-right: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark-theme .aspect-header::after {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+
+/* Table Cells */
+.tense-cell {
+    padding: 8px 10px;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    background: #ffffff;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    touch-action: manipulation;
+    height: 60px !important;
+    min-height: 60px !important;
+    max-height: 60px !important;
+    vertical-align: middle;
+    display: table-cell;
+}
+
+.tense-cell:hover {
+    background: #f7fafc;
+    transform: scale(1.02);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
+.tense-cell:active {
+    transform: scale(0.98);
+}
+
+/* Example Content */
+.example {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    align-items: center;
+    font-size: 0.85rem;
+    line-height: 1.2;
+    height: 100%;
+    justify-content: center;
+}
+
+.subject {
+    color: #4a5568;
+    font-weight: 500;
+}
+
+.verb {
+    color: #667eea;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: underline;
+    text-decoration-color: #667eea;
+    text-underline-offset: 2px;
+}
+
+.object {
+    color: #718096;
+    font-style: italic;
+}
+
+/* Aspect-specific styling */
+.tense-cell[data-tense*="simple"] {
+    border-top: 4px solid #48bb78;
+}
+
+.tense-cell[data-tense*="continuous"] {
+    border-top: 4px solid #ed8936;
+}
+
+.tense-cell[data-tense*="perfect"] {
+    border-top: 4px solid #9f7aea;
+}
+
+.tense-cell[data-tense*="perfect-continuous"] {
+    border-top: 4px solid #e53e3e;
+}
+
+/* Dark Theme for Table */
+.dark-theme .table-section {
+    background: rgba(45, 55, 72, 0.95);
+    color: #e2e8f0;
+}
+
+.dark-theme .table-section-title {
+    color: #e2e8f0;
+}
+
+.dark-theme .table-section-subtitle {
+    color: #a0aec0;
+}
+
+.dark-theme .table-wrapper {
+    background: #2d3748;
+}
+
+.dark-theme .tense-cell {
+    background: #2d3748;
+    border-color: #4a5568;
+    color: #e2e8f0;
+}
+
+.dark-theme .tense-cell:hover {
+    background: #4a5568;
+}
+
+.dark-theme .subject {
+    color: #a0aec0;
+}
+
+.dark-theme .object {
+    color: #718096;
+}
+
+/* Responsive Table */
+@media (max-width: 768px) {
+    .table-section {
+        padding: 20px;
+    }
+    
+    .table-section-title {
+        font-size: 1.5rem;
+    }
+    
+    .tenses-table th {
+        padding: 15px 10px;
+        font-size: 0.8rem;
+    }
+    
+    .aspect-header {
+        padding: 20px 10px;
+        font-size: 0.8rem;
+        height: 50px !important;
+        min-height: 50px !important;
+        max-height: 50px !important;
+        width: 100px;
+        max-width: 100px;
+    }
+    
+    .tense-cell {
+        padding: 6px 8px;
+        height: 50px !important;
+        min-height: 50px !important;
+        max-height: 50px !important;
+    }
+    
+    .tenses-table tbody tr {
+        height: 50px;
+    }
+    
+    .example {
+        font-size: 0.8rem;
+    }
+    
+    .verb {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .table-section {
+        padding: 15px;
+    }
+    
+    .table-section-title {
+        font-size: 1.3rem;
+    }
+    
+    .tenses-table th {
+        padding: 12px 8px;
+        font-size: 0.7rem;
+    }
+    
+    .aspect-header {
+        padding: 15px 8px;
+        font-size: 0.9rem;
+        height: 45px !important;
+        min-height: 45px !important;
+        max-height: 45px !important;
+        width: 80px;
+        max-width: 80px;
+    }
+    
+    .tense-cell {
+        padding: 4px 6px;
+        height: 45px !important;
+        min-height: 45px !important;
+        max-height: 45px !important;
+    }
+    
+    .tenses-table tbody tr {
+        height: 45px;
+    }
+    
+    .example {
+        font-size: 0.8rem;
+        gap: 3px;
+    }
+    
+    .verb {
+        font-size: 0.8rem;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 360px) {
+    .aspect-header {
+        width: 70px;
+        max-width: 70px;
+        padding: 15px 6px;
+        font-size: 0.8rem;
+    }
+}

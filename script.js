@@ -208,52 +208,7 @@ function addCopyFunctionality() {
 // Initialize copy functionality when DOM is loaded
 document.addEventListener('DOMContentLoaded', addCopyFunctionality);
 
-// Add theme toggle functionality (bonus feature)
-function addThemeToggle() {
-    const themeToggle = document.createElement('button');
-    themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
-    themeToggle.className = 'theme-toggle';
-    themeToggle.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: rgba(255, 255, 255, 0.9);
-        border: none;
-        border-radius: 50%;
-        width: 50px;
-        height: 50px;
-        cursor: pointer;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        transition: all 0.3s ease;
-        z-index: 1000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.2rem;
-        color: #2d3748;
-    `;
-    
-    themeToggle.addEventListener('click', function() {
-        document.body.classList.toggle('dark-theme');
-        const isDark = document.body.classList.contains('dark-theme');
-        this.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-        
-        // Save theme preference
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    });
-    
-    // Load saved theme
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-        document.body.classList.add('dark-theme');
-        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-    }
-    
-    document.body.appendChild(themeToggle);
-}
-
-// Initialize theme toggle
-document.addEventListener('DOMContentLoaded', addThemeToggle);
+// Theme toggle functionality moved to hamburger menu
 
 // Add scroll to top functionality
 function addScrollToTopFunctionality() {

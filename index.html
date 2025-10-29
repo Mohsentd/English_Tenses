@@ -25,7 +25,7 @@
                 <div class="feature-tabs">
                     <div class="feature-tab active" data-feature="basic">
                         <i class="fas fa-table"></i>
-                        Basic Guide
+                        Overview
                     </div>
                     <div class="feature-tab" data-feature="signal-words">
                         <i class="fas fa-key"></i>
@@ -42,6 +42,48 @@
                 </div>
             </div>
         </section>
+
+        <!-- Floating Hamburger Menu Button -->
+        <button class="hamburger-menu" id="hamburgerMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <!-- Mobile Menu Overlay -->
+        <div class="mobile-menu-overlay" id="mobileMenuOverlay">
+            <div class="mobile-menu">
+                <div class="mobile-menu-header">
+                    <h3>Menu</h3>
+                </div>
+                <div class="mobile-menu-content">
+                    <div class="mobile-feature-tabs">
+                        <div class="mobile-feature-tab active" data-feature="basic">
+                            <i class="fas fa-table"></i>
+                            Overview
+                        </div>
+                        <div class="mobile-feature-tab" data-feature="signal-words">
+                            <i class="fas fa-key"></i>
+                            Signal Words
+                        </div>
+                        <div class="mobile-feature-tab" data-feature="real-world">
+                            <i class="fas fa-globe"></i>
+                            Real-World Examples
+                        </div>
+                        <div class="mobile-feature-tab" data-feature="comparison">
+                            <i class="fas fa-balance-scale"></i>
+                            Comparison Tables
+                        </div>
+                    </div>
+                    <div class="mobile-menu-actions">
+                        <button class="mobile-theme-toggle" id="mobileThemeToggle">
+                            <i class="fas fa-moon"></i>
+                            <span>Dark Mode</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <main class="main-content">
             <section id="basic" class="feature-section active">

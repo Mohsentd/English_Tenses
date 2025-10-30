@@ -1672,10 +1672,10 @@ html { scrollbar-gutter: stable both-edges; }
 @media (max-width: 768px) {
     .hero-title { font-size: 2rem; }
     .section-title { font-size: 2rem; }
-    /* Keep feature tabs visible, icon-only */
-    .feature-tabs { display: flex; justify-content: center; gap: 8px; }
-    .feature-tab { padding: 8px 10px; font-size: 0; }
-    .feature-tab i { font-size: 1.1rem; margin: 0; }
+    /* Responsive horizontal buttons that cover width */
+    .feature-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; width: 100%; }
+    .feature-tab { padding: 10px 12px; font-size: 0; justify-content: center; text-align: center; }
+    .feature-tab i { font-size: 1.2rem; margin: 0; }
     .signal-words-grid { grid-template-columns: 1fr; }
     .example-categories { grid-template-columns: 1fr; }
     
@@ -1710,9 +1710,9 @@ html { scrollbar-gutter: stable both-edges; }
         width: 100%;
     }
     /* Even more compact feature tabs on very small screens */
-    .feature-tabs { gap: 6px; }
-    .feature-tab { padding: 6px 8px; }
-    .feature-tab i { font-size: 1rem; }
+    .feature-tabs { gap: 6px; grid-template-columns: repeat(4, 1fr); }
+    .feature-tab { padding: 8px 10px; font-size: 0; justify-content: center; }
+    .feature-tab i { font-size: 1.1rem; margin: 0; }
     
     .comparison-table-content th,
     .comparison-table-content td {

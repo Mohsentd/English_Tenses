@@ -2,6 +2,79 @@
 const searchInput = document.getElementById('searchInput');
 const tensesGrid = document.getElementById('tensesGrid');
 const tenseCards = document.querySelectorAll('.tense-card');
+const overviewTableSection = document.getElementById('overviewTableSection');
+const passiveToggle = document.getElementById('passiveToggle');
+
+// Mapping for overview table examples (active vs passive)
+const tableExamples = {
+    'past-simple': {
+        active: { subject: 'I', verb: 'worked', object: 'yesterday.' },
+        passive: { subject: 'I', verb: 'was invited', object: 'yesterday.' }
+    },
+    'present-simple': {
+        active: { subject: 'I', verb: 'work', object: 'every day.' },
+        passive: { subject: 'I', verb: 'am invited', object: 'every day.' }
+    },
+    'future-simple': {
+        active: { subject: 'I', verb: 'will work', object: 'tomorrow.' },
+        passive: { subject: 'I', verb: 'will be invited', object: 'tomorrow.' }
+    },
+    'past-continuous': {
+        active: { subject: 'I', verb: 'was working', object: 'when you called.' },
+        passive: { subject: 'I', verb: 'was being watched', object: 'when you called.' }
+    },
+    'present-continuous': {
+        active: { subject: 'I', verb: 'am working', object: 'now.' },
+        passive: { subject: 'I', verb: 'am being watched', object: 'now.' }
+    },
+    'future-continuous': {
+        active: { subject: 'I', verb: 'will be working', object: 'at 3 PM.' },
+        passive: { subject: 'I', verb: 'will be being watched', object: 'at 3 PM.' }
+    },
+    'past-perfect': {
+        active: { subject: 'I', verb: 'had worked', object: 'there before.' },
+        passive: { subject: 'I', verb: 'had been invited', object: 'before.' }
+    },
+    'present-perfect': {
+        active: { subject: 'I', verb: 'have worked', object: 'here for 5 years.' },
+        passive: { subject: 'I', verb: 'have been invited', object: '' }
+    },
+    'future-perfect': {
+        active: { subject: 'I', verb: 'will have worked', object: 'here for 5 years.' },
+        passive: { subject: 'I', verb: 'will have been invited', object: '' }
+    },
+    'past-perfect-continuous': {
+        active: { subject: 'I', verb: 'had been working', object: 'for 3 hours.' },
+        passive: { subject: 'I', verb: 'had been being watched', object: 'for 3 hours.' }
+    },
+    'present-perfect-continuous': {
+        active: { subject: 'I', verb: 'have been working', object: 'for 3 hours.' },
+        passive: { subject: 'I', verb: 'have been being watched', object: 'for 3 hours.' }
+    },
+    'future-perfect-continuous': {
+        active: { subject: 'I', verb: 'will have been working', object: 'for 3 hours.' },
+        passive: { subject: 'I', verb: 'will have been being watched', object: 'for 3 hours.' }
+    }
+};
+
+function setTableExamples(passiveOn) {
+    const cells = document.querySelectorAll('.tenses-table .tense-cell[data-tense]');
+    cells.forEach(cell => {
+        const tense = cell.getAttribute('data-tense');
+        const mapping = tableExamples[tense];
+        if (!mapping) return;
+        const mode = passiveOn ? mapping.passive : mapping.active;
+        const subjEl = cell.querySelector('.example .subject');
+        const verbEl = cell.querySelector('.example .verb');
+        const objEl = cell.querySelector('.example .object');
+        if (subjEl) subjEl.textContent = mode.subject;
+        if (verbEl) verbEl.textContent = mode.verb;
+        if (objEl) objEl.textContent = mode.object;
+    });
+    if (overviewTableSection) {
+        overviewTableSection.classList.toggle('passive-on', !!passiveOn);
+    }
+}
 
 // Search functionality
 function performSearch() {
@@ -157,6 +230,18 @@ document.addEventListener('DOMContentLoaded', function() {
         card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(card);
     });
+    
+    // Initialize passive toggle for overview table
+    if (passiveToggle) {
+        const saved = localStorage.getItem('tablePassiveOn') === '1';
+        passiveToggle.checked = saved;
+        setTableExamples(saved);
+        passiveToggle.addEventListener('change', function() {
+            const on = this.checked;
+            localStorage.setItem('tablePassiveOn', on ? '1' : '0');
+            setTableExamples(on);
+        });
+    }
 });
 
 // Add keyboard shortcuts

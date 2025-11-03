@@ -89,12 +89,19 @@
         <main class="main-content">
             <section id="basic" class="feature-section active">
             <!-- Tenses Overview Table -->
-            <div class="table-section">
+            <div class="table-section" id="overviewTableSection">
                 <h2 class="table-section-title">
                     <i class="fas fa-table"></i>
                     Tenses Overview
                 </h2>
                 <p class="table-section-subtitle">Click any cell to jump to the detailed explanation</p>
+                <div class="table-controls" aria-label="Overview table controls">
+                    <label class="switch" for="passiveToggle" title="Toggle passive examples in the table">
+                        <input type="checkbox" id="passiveToggle" aria-label="Show passive examples">
+                        <span class="slider" aria-hidden="true"></span>
+                        <span class="switch-label">Passive</span>
+                    </label>
+                </div>
                 
                 <div class="table-container">
                     <div class="table-wrapper">

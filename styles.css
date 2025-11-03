@@ -750,10 +750,11 @@ html { scrollbar-gutter: stable both-edges; }
 /* Table controls (Passive toggle) */
 .table-controls {
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
     gap: 10px;
     margin: 0 0 15px 0;
+    width: 100%;
 }
 
 .switch {

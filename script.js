@@ -9,51 +9,51 @@ const passiveToggle = document.getElementById('passiveToggle');
 const tableExamples = {
     'past-simple': {
         active: { subject: 'I', verb: 'worked', object: 'yesterday.' },
-        passive: { subject: 'I', verb: 'was invited', object: 'yesterday.' }
+        passive: { subject: 'The house', verb: 'was built', object: 'yesterday.' }
     },
     'present-simple': {
         active: { subject: 'I', verb: 'work', object: 'every day.' },
-        passive: { subject: 'I', verb: 'am invited', object: 'every day.' }
+        passive: { subject: 'The mail', verb: 'is delivered', object: 'every day.' }
     },
     'future-simple': {
         active: { subject: 'I', verb: 'will work', object: 'tomorrow.' },
-        passive: { subject: 'I', verb: 'will be invited', object: 'tomorrow.' }
+        passive: { subject: 'The meeting', verb: 'will be held', object: 'tomorrow.' }
     },
     'past-continuous': {
         active: { subject: 'I', verb: 'was working', object: 'when you called.' },
-        passive: { subject: 'I', verb: 'was being watched', object: 'when you called.' }
+        passive: { subject: 'The road', verb: 'was being repaired', object: 'when you called.' }
     },
     'present-continuous': {
         active: { subject: 'I', verb: 'am working', object: 'now.' },
-        passive: { subject: 'I', verb: 'am being watched', object: 'now.' }
+        passive: { subject: 'The road', verb: 'is being repaired', object: 'now.' }
     },
     'future-continuous': {
         active: { subject: 'I', verb: 'will be working', object: 'at 3 PM.' },
-        passive: { subject: 'I', verb: 'will be being watched', object: 'at 3 PM.' }
+        passive: { subject: 'The road', verb: 'will be being repaired', object: 'at 3 PM.' }
     },
     'past-perfect': {
         active: { subject: 'I', verb: 'had worked', object: 'there before.' },
-        passive: { subject: 'I', verb: 'had been invited', object: 'before.' }
+        passive: { subject: 'The project', verb: 'had been completed', object: 'before we arrived.' }
     },
     'present-perfect': {
         active: { subject: 'I', verb: 'have worked', object: 'here for 5 years.' },
-        passive: { subject: 'I', verb: 'have been invited', object: '' }
+        passive: { subject: 'The project', verb: 'has been completed', object: '' }
     },
     'future-perfect': {
         active: { subject: 'I', verb: 'will have worked', object: 'here for 5 years.' },
-        passive: { subject: 'I', verb: 'will have been invited', object: '' }
+        passive: { subject: 'The project', verb: 'will have been completed', object: 'by 5 PM.' }
     },
     'past-perfect-continuous': {
         active: { subject: 'I', verb: 'had been working', object: 'for 3 hours.' },
-        passive: { subject: 'I', verb: 'had been being watched', object: 'for 3 hours.' }
+        passive: { subject: 'The bridge', verb: 'had been being repaired', object: 'for 3 hours.' }
     },
     'present-perfect-continuous': {
         active: { subject: 'I', verb: 'have been working', object: 'for 3 hours.' },
-        passive: { subject: 'I', verb: 'have been being watched', object: 'for 3 hours.' }
+        passive: { subject: 'The bridge', verb: 'has been being repaired', object: 'for 3 hours.' }
     },
     'future-perfect-continuous': {
         active: { subject: 'I', verb: 'will have been working', object: 'for 3 hours.' },
-        passive: { subject: 'I', verb: 'will have been being watched', object: 'for 3 hours.' }
+        passive: { subject: 'The bridge', verb: 'will have been being repaired', object: 'for 3 hours.' }
     }
 };
 
@@ -74,6 +74,20 @@ function setTableExamples(passiveOn) {
     if (overviewTableSection) {
         overviewTableSection.classList.toggle('passive-on', !!passiveOn);
     }
+    // Mark Perfect Continuous row with an asterisk when passive is on
+    setPerfectContinuousMarker(passiveOn);
+}
+
+// Add/Remove asterisk to the "Perfect Continuous" aspect header when passive toggle is on
+function setPerfectContinuousMarker(passiveOn) {
+    const aspectHeaders = document.querySelectorAll('.tenses-table .aspect-header');
+    aspectHeaders.forEach((td) => {
+        const baseLabel = (td.getAttribute('data-base-label') || td.textContent.trim()).replace(/\*$/, '');
+        td.setAttribute('data-base-label', baseLabel);
+        if (baseLabel.toLowerCase() === 'perfect continuous') {
+            td.textContent = passiveOn ? baseLabel + ' *' : baseLabel;
+        }
+    });
 }
 
 // Search functionality

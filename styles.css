@@ -715,6 +715,47 @@ html { scrollbar-gutter: stable both-edges; }
     background: linear-gradient(135deg, #667eea, #764ba2) !important;
 }
 
+/* Example spotlight overlay */
+.example-spotlight-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.25);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 20px;
+}
+
+.example-spotlight-content {
+    background: #ffffff;
+    color: #2d3748;
+    border-radius: 14px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    padding: 18px 22px;
+    transform: scale(1.05);
+    animation: spotlightIn 150ms ease-out;
+    max-width: 800px;
+}
+
+.example-spotlight-content .spotlight-text {
+    font-size: 1.15rem;
+    line-height: 1.7;
+}
+
+@keyframes spotlightIn {
+    from { transform: scale(0.96); opacity: 0; }
+    to { transform: scale(1.05); opacity: 1; }
+}
+
+.dark-theme .example-spotlight-content {
+    background: #2d3748;
+    color: #e2e8f0;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.45);
+}
+
 /* Table Section Styles */
 .table-section {
     background: rgba(255, 255, 255, 0.95);

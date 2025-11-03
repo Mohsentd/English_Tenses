@@ -2,67 +2,29 @@
 const tenseCells = document.querySelectorAll('.tense-cell');
 const examples = document.querySelectorAll('.example');
 
-// Add click functionality to copy examples
+// Add click functionality to focus examples (no copy)
 function addCopyFunctionality() {
     tenseCells.forEach(cell => {
-        cell.addEventListener('click', function() {
-            const exampleText = this.querySelector('.example').textContent;
-            const tenseName = this.getAttribute('data-tense');
-            
-            // Copy to clipboard
-            navigator.clipboard.writeText(exampleText).then(() => {
-                showCopyFeedback(this, 'Copied!');
-            }).catch(err => {
-                console.error('Failed to copy text: ', err);
-                showCopyFeedback(this, 'Copy failed');
-            });
-        });
-        
-        // Add keyboard support
+        const ex = cell.querySelector('.example');
+        if (!ex) return;
+        ex.style.cursor = 'zoom-in';
+        const showSpotlight = () => {
+            const overlay = document.createElement('div');
+            overlay.className = 'example-spotlight-overlay';
+            overlay.innerHTML = `<div class="example-spotlight-content"><div class="spotlight-text">${ex.innerHTML}</div></div>`;
+            document.body.appendChild(overlay);
+            overlay.addEventListener('click', (e) => { if (e.target === overlay) overlay.remove(); });
+            const esc = (e) => { if (e.key === 'Escape') { overlay.remove(); document.removeEventListener('keydown', esc); } };
+            document.addEventListener('keydown', esc);
+        };
+        cell.addEventListener('click', showSpotlight);
         cell.setAttribute('tabindex', '0');
         cell.setAttribute('role', 'button');
-        cell.setAttribute('aria-label', 'Click to copy example');
-        
+        cell.setAttribute('aria-label', 'Click to focus example');
         cell.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                this.click();
-            }
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showSpotlight(); }
         });
     });
-}
-
-// Show copy feedback
-function showCopyFeedback(element, message) {
-    const originalContent = element.innerHTML;
-    const feedback = document.createElement('div');
-    feedback.className = 'copy-feedback';
-    feedback.innerHTML = `
-        <div style="
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #48bb78;
-            color: white;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            animation: fadeInOut 2s ease-in-out;
-        ">
-            <i class="fas fa-check"></i> ${message}
-        </div>
-    `;
-    
-    element.style.position = 'relative';
-    element.appendChild(feedback);
-    
-    setTimeout(() => {
-        feedback.remove();
-    }, 2000);
 }
 
 // Add hover effects and tense information

@@ -276,36 +276,48 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-// Add copy functionality for examples
-function addCopyFunctionality() {
-    tenseCards.forEach(card => {
-        const examples = card.querySelectorAll('.tense-examples li');
-        examples.forEach(example => {
-            example.style.cursor = 'pointer';
-            example.title = 'Click to copy example';
-            
-            example.addEventListener('click', function() {
-                const text = this.textContent;
-                navigator.clipboard.writeText(text).then(() => {
-                    // Show temporary feedback
-                    const originalText = this.innerHTML;
-                    this.innerHTML = '<i class="fas fa-check" style="color: #48bb78;"></i> Copied!';
-                    this.style.color = '#48bb78';
-                    
-                    setTimeout(() => {
-                        this.innerHTML = originalText;
-                        this.style.color = '';
-                    }, 1500);
-                }).catch(err => {
-                    console.error('Failed to copy text: ', err);
-                });
-            });
+// Spotlight behavior for examples (no copy)
+function addExampleSpotlightBehavior() {
+    function showSpotlight(html) {
+        // Create overlay
+        const overlay = document.createElement('div');
+        overlay.className = 'example-spotlight-overlay';
+        overlay.innerHTML = `
+            <div class="example-spotlight-content">
+                ${html}
+            </div>
+        `;
+        document.body.appendChild(overlay);
+        // Close on click or ESC
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) overlay.remove();
+        });
+        const esc = (e) => { if (e.key === 'Escape') { overlay.remove(); document.removeEventListener('keydown', esc); } };
+        document.addEventListener('keydown', esc);
+    }
+
+    // Card examples (list items)
+    document.querySelectorAll('.tense-examples li').forEach(li => {
+        li.style.cursor = 'zoom-in';
+        li.title = 'Click to focus example';
+        li.addEventListener('click', function(e) {
+            e.stopPropagation();
+            showSpotlight(`<div class="spotlight-text">${this.innerHTML}</div>`);
+        });
+    });
+
+    // Table examples inside overview grid
+    document.querySelectorAll('.tenses-table .tense-cell .example').forEach(ex => {
+        ex.style.cursor = 'zoom-in';
+        ex.addEventListener('click', function(e) {
+            e.stopPropagation();
+            showSpotlight(`<div class="spotlight-text">${this.innerHTML}</div>`);
         });
     });
 }
 
-// Initialize copy functionality when DOM is loaded
-document.addEventListener('DOMContentLoaded', addCopyFunctionality);
+// Initialize spotlight behavior when DOM is loaded
+document.addEventListener('DOMContentLoaded', addExampleSpotlightBehavior);
 
 // Theme toggle functionality moved to hamburger menu
 

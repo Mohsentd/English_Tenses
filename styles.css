@@ -273,10 +273,10 @@ html { scrollbar-gutter: stable both-edges; }
 
 /* Passive block */
 .tense-passive {
-    background: #e6fffa;
+    background: #ebf8ff; /* light blue */
     padding: 15px;
     border-radius: 10px;
-    border-left: 4px solid #38b2ac;
+    border-left: 4px solid #3182ce; /* blue accent */
     margin-bottom: 15px;
 }
 
@@ -529,9 +529,9 @@ html { scrollbar-gutter: stable both-edges; }
 }
 
 .dark-theme .tense-passive {
-    background: #2c7a7b;
+    background: #1a202c; /* dark panel */
     color: #e2e8f0;
-    border-left-color: #319795;
+    border-left-color: #63b3ed; /* light blue accent */
 }
 
 .dark-theme .tense-passive strong {

@@ -491,6 +491,11 @@ html { scrollbar-gutter: stable both-edges; }
     box-shadow: none;
 }
 
+/* Do not add extra padding inside the main content area in dark mode */
+.dark-theme .main-content .container {
+    padding: 0 !important;
+}
+
 .dark-theme .tense-card {
     background: #2d3748;
     border-color: #4a5568;
@@ -1506,6 +1511,45 @@ html { scrollbar-gutter: stable both-edges; }
 }
 
 /* Signal Words */
+.signal-words-search-container {
+    margin: 30px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.signal-words-search-box {
+    position: relative;
+    max-width: 500px;
+    width: 100%;
+}
+
+.signal-words-search-box i {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #a0aec0;
+    font-size: 1.1rem;
+}
+
+#signalWordsSearchInput {
+    width: 100%;
+    padding: 15px 20px 15px 50px;
+    border: 2px solid #e2e8f0;
+    border-radius: 50px;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+#signalWordsSearchInput:focus {
+    border-color: #3182ce;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+    transform: translateY(-2px);
+}
+
 .signal-words-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -1519,6 +1563,10 @@ html { scrollbar-gutter: stable both-edges; }
     padding: 30px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.signal-card.hidden {
+    display: none;
 }
 
 .signal-card:hover {
@@ -1548,6 +1596,30 @@ html { scrollbar-gutter: stable both-edges; }
     font-weight: 500;
     font-size: 0.9rem;
     border: 1px solid #bee3f8;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.signal-word:hover {
+    background: #cfe2f3;
+    border-color: #90cdf4;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(49, 130, 206, 0.2);
+}
+
+.signal-word.active {
+    background: #2c5282;
+    color: white;
+    border-color: #2c5282;
+    box-shadow: 0 2px 8px rgba(44, 82, 130, 0.4);
+}
+
+.signal-word-highlight {
+    background: #fef5e7;
+    color: #d69e2e;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-weight: 700;
 }
 
 .signal-example {
@@ -1561,6 +1633,16 @@ html { scrollbar-gutter: stable both-edges; }
     margin: 0;
     color: #4a5568;
     line-height: 1.6;
+    min-height: 1.5em;
+}
+
+.signal-example p:empty {
+    min-height: 0;
+}
+
+.signal-example p strong {
+    color: #2d3748;
+    font-weight: 700;
 }
 
 /* Real-World Examples */
@@ -1710,10 +1792,49 @@ html { scrollbar-gutter: stable both-edges; }
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
+.dark-theme #signalWordsSearchInput {
+    background: rgba(45, 55, 72, 0.95);
+    border-color: #4a5568;
+    color: #e2e8f0;
+}
+
+.dark-theme #signalWordsSearchInput::placeholder {
+    color: #a0aec0;
+}
+
+.dark-theme #signalWordsSearchInput:focus {
+    border-color: #3182ce;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.2);
+}
+
 .dark-theme .signal-card h3 { color: #e2e8f0; }
-.dark-theme .signal-word { background: #2d3748; color: #63b3ed; border-color: #4a5568; }
+.dark-theme .signal-word { 
+    background: #2d3748; 
+    color: #63b3ed; 
+    border-color: #4a5568; 
+}
+.dark-theme .signal-word:hover {
+    background: #4a5568;
+    border-color: #63b3ed;
+    box-shadow: 0 2px 8px rgba(99, 179, 237, 0.3);
+}
+.dark-theme .signal-word.active {
+    background: #3182ce;
+    color: white;
+    border-color: #3182ce;
+    box-shadow: 0 2px 8px rgba(49, 130, 206, 0.5);
+}
+
+.dark-theme .signal-word-highlight {
+    background: #744210;
+    color: #f6ad55;
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-weight: 700;
+}
 .dark-theme .signal-example { background: #1a202c; border-left-color: #63b3ed; }
 .dark-theme .signal-example p { color: #a0aec0; }
+.dark-theme .signal-example p strong { color: #e2e8f0; }
 .dark-theme .example-category h3 { color: #e2e8f0; }
 .dark-theme .example-item { background: #2d3748; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3); }
 .dark-theme .example-text { color: #e2e8f0; }

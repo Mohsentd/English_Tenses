@@ -755,6 +755,25 @@ html { scrollbar-gutter: stable both-edges; }
     to { transform: scale(1.05); opacity: 1; }
 }
 
+/* Style verbs in table and modal to match card examples */
+.verb {
+    color: #667eea;
+    font-weight: 600;
+}
+
+.example-spotlight-content em,
+.example-spotlight-content .verb {
+    color: #667eea;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.dark-theme .example-spotlight-content em,
+.dark-theme .example-spotlight-content .verb,
+.dark-theme .verb {
+    color: #63b3ed;
+}
+
 .dark-theme .example-spotlight-content {
     background: #2d3748;
     color: #e2e8f0;

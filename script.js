@@ -93,7 +93,7 @@ function setPerfectContinuousMarker(passiveOn) {
 // Search functionality
 function performSearch() {
     const searchTerm = searchInput.value.toLowerCase().trim();
-    
+
     if (searchTerm === '') {
         // Show all cards if search is empty
         tenseCards.forEach(card => {
@@ -102,11 +102,11 @@ function performSearch() {
         });
         return;
     }
-    
+
     tenseCards.forEach(card => {
         const cardContent = card.textContent.toLowerCase();
         const isMatch = cardContent.includes(searchTerm);
-        
+
         if (isMatch) {
             card.classList.remove('hidden');
             card.classList.add('fade-in');
@@ -115,7 +115,7 @@ function performSearch() {
             card.classList.remove('fade-in');
         }
     });
-    
+
     // Show message if no results found
     showNoResultsMessage(searchTerm);
 }
@@ -123,13 +123,13 @@ function performSearch() {
 // Show no results message
 function showNoResultsMessage(searchTerm) {
     const visibleCards = document.querySelectorAll('.tense-card:not(.hidden)');
-    
+
     // Remove existing no results message
     const existingMessage = document.querySelector('.no-results-message');
     if (existingMessage) {
         existingMessage.remove();
     }
-    
+
     if (visibleCards.length === 0 && searchTerm !== '') {
         const noResultsMessage = document.createElement('div');
         noResultsMessage.className = 'no-results-message';
@@ -147,9 +147,9 @@ function showNoResultsMessage(searchTerm) {
 // Highlight search terms in results
 function highlightSearchTerms(searchTerm) {
     if (searchTerm === '') return;
-    
+
     const visibleCards = document.querySelectorAll('.tense-card:not(.hidden)');
-    
+
     visibleCards.forEach(card => {
         const walker = document.createTreeWalker(
             card,
@@ -157,21 +157,21 @@ function highlightSearchTerms(searchTerm) {
             null,
             false
         );
-        
+
         const textNodes = [];
         let node;
-        
+
         while (node = walker.nextNode()) {
             textNodes.push(node);
         }
-        
+
         textNodes.forEach(textNode => {
             const parent = textNode.parentNode;
             if (parent.tagName !== 'SCRIPT' && parent.tagName !== 'STYLE') {
                 const text = textNode.textContent;
                 const regex = new RegExp(`(${searchTerm})`, 'gi');
                 const highlightedText = text.replace(regex, '<mark style="background: #fef5e7; color: #d69e2e; padding: 2px 4px; border-radius: 3px;">$1</mark>');
-                
+
                 if (highlightedText !== text) {
                     const span = document.createElement('span');
                     span.innerHTML = highlightedText;
@@ -193,10 +193,10 @@ function clearHighlights() {
 }
 
 // Event listeners
-searchInput.addEventListener('input', function() {
+searchInput.addEventListener('input', function () {
     clearHighlights();
     performSearch();
-    
+
     // Add a small delay before highlighting to improve performance
     setTimeout(() => {
         if (searchInput.value.trim() !== '') {
@@ -206,11 +206,11 @@ searchInput.addEventListener('input', function() {
 });
 
 // Add smooth scrolling for better UX
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Add smooth scrolling to all anchor links
     const links = document.querySelectorAll('a[href^="#"]');
     links.forEach(link => {
-        link.addEventListener('click', function(e) {
+        link.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
@@ -221,14 +221,14 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-    
+
     // Add intersection observer for fade-in animations
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
     };
-    
-    const observer = new IntersectionObserver(function(entries) {
+
+    const observer = new IntersectionObserver(function (entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
@@ -236,7 +236,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }, observerOptions);
-    
+
     // Observe all tense cards
     tenseCards.forEach(card => {
         card.style.opacity = '0';
@@ -244,13 +244,13 @@ document.addEventListener('DOMContentLoaded', function() {
         card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(card);
     });
-    
+
     // Initialize passive toggle for overview table
     if (passiveToggle) {
         const saved = localStorage.getItem('tablePassiveOn') === '1';
         passiveToggle.checked = saved;
         setTableExamples(saved);
-        passiveToggle.addEventListener('change', function() {
+        passiveToggle.addEventListener('change', function () {
             const on = this.checked;
             localStorage.setItem('tablePassiveOn', on ? '1' : '0');
             setTableExamples(on);
@@ -259,14 +259,14 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Add keyboard shortcuts
-document.addEventListener('keydown', function(e) {
+document.addEventListener('keydown', function (e) {
     // Focus search input with Ctrl/Cmd + K
     if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
         e.preventDefault();
         searchInput.focus();
         searchInput.select();
     }
-    
+
     // Clear search with Escape
     if (e.key === 'Escape') {
         searchInput.value = '';
@@ -300,7 +300,7 @@ function addExampleSpotlightBehavior() {
     document.querySelectorAll('.tense-examples li').forEach(li => {
         li.style.cursor = 'zoom-in';
         li.title = 'Click to focus example';
-        li.addEventListener('click', function(e) {
+        li.addEventListener('click', function (e) {
             e.stopPropagation();
             showSpotlight(`<div class="spotlight-text">${this.innerHTML}</div>`);
         });
@@ -308,8 +308,11 @@ function addExampleSpotlightBehavior() {
 
     // Table examples inside overview grid
     document.querySelectorAll('.tenses-table .tense-cell .example').forEach(ex => {
+        // Skip if the parent cell is meant for navigation
+        if (ex.closest('.tense-cell').hasAttribute('data-target')) return;
+
         ex.style.cursor = 'zoom-in';
-        ex.addEventListener('click', function(e) {
+        ex.addEventListener('click', function (e) {
             e.stopPropagation();
             showSpotlight(`<div class="spotlight-text">${this.innerHTML}</div>`);
         });
@@ -347,7 +350,7 @@ function addScrollToTopFunctionality() {
         justify-content: center;
         font-size: 1.2rem;
     `;
-    
+
     function getActiveTarget() {
         const activeSection = document.querySelector('.feature-section.active');
         if (activeSection) {
@@ -357,26 +360,26 @@ function addScrollToTopFunctionality() {
         return document.body;
     }
 
-    scrollToTopButton.addEventListener('click', function() {
+    scrollToTopButton.addEventListener('click', function () {
         const target = getActiveTarget();
         target.scrollIntoView({
             behavior: 'smooth',
             block: 'start'
         });
     });
-    
-    scrollToTopButton.addEventListener('mouseenter', function() {
+
+    scrollToTopButton.addEventListener('mouseenter', function () {
         this.style.transform = 'translateY(-2px) scale(1.1)';
         this.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.2)';
     });
-    
-    scrollToTopButton.addEventListener('mouseleave', function() {
+
+    scrollToTopButton.addEventListener('mouseleave', function () {
         this.style.transform = 'translateY(0) scale(1)';
         this.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
     });
-    
+
     document.body.appendChild(scrollToTopButton);
-    
+
     // Show/hide button based on scroll position
     function toggleScrollButton() {
         const target = getActiveTarget();
@@ -389,17 +392,17 @@ function addScrollToTopFunctionality() {
             scrollToTopButton.classList.remove('show');
         }
     }
-    
+
     // Listen for scroll events
     window.addEventListener('scroll', toggleScrollButton);
     // Re-evaluate when switching tabs/sections
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
         if (e.target.closest('.feature-tab')) {
             // Wait a tick for the class change to apply
             setTimeout(toggleScrollButton, 50);
         }
     });
-    
+
     // Initial check
     toggleScrollButton();
 }
@@ -411,7 +414,7 @@ document.addEventListener('DOMContentLoaded', addScrollToTopFunctionality);
 function trackUsage() {
     // Track search usage
     let searchCount = 0;
-    searchInput.addEventListener('input', function() {
+    searchInput.addEventListener('input', function () {
         if (this.value.trim() !== '') {
             searchCount++;
             if (searchCount === 1) {
@@ -419,10 +422,10 @@ function trackUsage() {
             }
         }
     });
-    
+
     // Track card interactions
     tenseCards.forEach(card => {
-        card.addEventListener('click', function() {
+        card.addEventListener('click', function () {
             const tenseName = this.querySelector('h3').textContent;
             console.log(`User interacted with: ${tenseName}`);
         });
@@ -435,59 +438,82 @@ document.addEventListener('DOMContentLoaded', trackUsage);
 // Table cell click functionality for scrolling to explanations
 function addTableScrollFunctionality() {
     const tableCells = document.querySelectorAll('.tense-cell[data-target]');
-    
+
     console.log('Found table cells:', tableCells.length);
-    
+
     if (tableCells.length === 0) {
         console.log('No table cells found with data-target attribute');
         return;
     }
-    
+
     tableCells.forEach((cell, index) => {
-        console.log(`Setting up click handler for cell ${index}:`, cell.getAttribute('data-target'));
-        
         // Remove any existing event listeners
         cell.removeEventListener('click', handleCellClick);
-        
+
         // Add new event listener
         cell.addEventListener('click', handleCellClick);
-        
+
         // Add touch event for better mobile support
-        cell.addEventListener('touchend', function(e) {
+        let isScrolling = false;
+        let startX, startY;
+
+        cell.addEventListener('touchstart', function (e) {
+            isScrolling = false;
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+        }, { passive: true });
+
+        cell.addEventListener('touchmove', function (e) {
+            if (!startX || !startY) return;
+            const xDiff = Math.abs(e.touches[0].clientX - startX);
+            const yDiff = Math.abs(e.touches[0].clientY - startY);
+
+            // If movement is significant (more than 10px), consider it a scroll
+            if (xDiff > 10 || yDiff > 10) {
+                isScrolling = true;
+            }
+        }, { passive: true });
+
+        cell.addEventListener('touchend', function (e) {
+            if (isScrolling) {
+                return; // Do nothing if it was a scroll
+            }
+            // If it wasn't a scroll, treat it as a click
             e.preventDefault();
             handleCellClick(e);
         });
-        
+
         function handleCellClick(e) {
-            e.preventDefault();
+            // Prevent default only if it's a direct click (not from touchend which already handled it)
+            if (e.type === 'click') {
+                e.preventDefault();
+            }
             e.stopPropagation();
-            
+
             const targetTense = cell.getAttribute('data-target');
             console.log('Clicked cell with target:', targetTense);
-            
+
             const targetCard = document.querySelector(`.tense-card[data-tense="${targetTense}"]`);
-            console.log('Found target card:', targetCard);
-            
+
             if (targetCard) {
                 console.log('Scrolling to target card');
-                
+
                 // Add highlight effect
                 targetCard.style.animation = 'pulse 0.6s ease-in-out';
-                
+
                 // Scroll to the target card with smooth behavior
-                // Add small delay for mobile devices to ensure proper rendering
                 setTimeout(() => {
                     targetCard.scrollIntoView({
                         behavior: 'smooth',
                         block: 'start'
                     });
                 }, 50);
-                
+
                 // Remove animation after it completes
                 setTimeout(() => {
                     targetCard.style.animation = '';
                 }, 600);
-                
+
                 // Add temporary highlight
                 targetCard.classList.add('highlighted-card');
                 setTimeout(() => {
@@ -495,18 +521,15 @@ function addTableScrollFunctionality() {
                 }, 2000);
             } else {
                 console.log('Target card not found for:', targetTense);
-                // Let's also try to find any card with similar data-tense
-                const allCards = document.querySelectorAll('.tense-card[data-tense]');
-                console.log('All available tense cards:', Array.from(allCards).map(card => card.getAttribute('data-tense')));
             }
         }
-        
+
         // Add keyboard support
         cell.setAttribute('tabindex', '0');
         cell.setAttribute('role', 'button');
         cell.setAttribute('aria-label', `Click to view ${cell.getAttribute('data-tense')} explanation`);
-        
-        cell.addEventListener('keydown', function(e) {
+
+        cell.addEventListener('keydown', function (e) {
             if (e.key === 'Enter' || e.key === ' ') {
                 e.preventDefault();
                 this.click();
@@ -544,104 +567,82 @@ function addHighlightAnimation() {
 // Alternative approach using event delegation
 function addTableScrollFunctionalityDelegated() {
     console.log('Setting up delegated event listener for table cells');
-    
-    document.addEventListener('click', function(e) {
+
+    // Variables to track touch movement for delegation
+    let isScrolling = false;
+    let startX, startY;
+
+    document.addEventListener('touchstart', function (e) {
+        if (e.target.closest('.tense-cell[data-target]')) {
+            isScrolling = false;
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+        }
+    }, { passive: true });
+
+    document.addEventListener('touchmove', function (e) {
+        if (e.target.closest('.tense-cell[data-target]')) {
+            if (!startX || !startY) return;
+            const xDiff = Math.abs(e.touches[0].clientX - startX);
+            const yDiff = Math.abs(e.touches[0].clientY - startY);
+
+            if (xDiff > 10 || yDiff > 10) {
+                isScrolling = true;
+            }
+        }
+    }, { passive: true });
+
+    document.addEventListener('touchend', function (e) {
+        if (isScrolling) return; // Ignore if scrolling
+
+        // Check if the touched element is a table cell with data-target
+        if (e.target.closest('.tense-cell[data-target]')) {
+            // We don't prevent default here to allow click to fire if needed, 
+            // but we can handle the logic if we want to be aggressive.
+            // However, the touchstart/move logic is mainly to set flags for the click handler or custom logic.
+            // Since we attached specific listeners in addTableScrollFunctionality, 
+            // the delegated listener is a backup or for dynamic elements.
+
+            // For now, let's keep the delegation simple:
+            // If we are strictly using delegation for everything, we would handle navigation here.
+            // But main logic is in per-element listeners above.
+
+            // If we want to support dynamic elements:
+            /*
+            e.preventDefault();
+            const cell = e.target.closest('.tense-cell[data-target]');
+            // ... invoke scroll logic ...
+            */
+            // Since the user focused on the fix, the per-element fix above is the primary one.
+            // We will leave the delegator passive but aware of scroll state if we decide to move logic here.
+        }
+    });
+
+    document.addEventListener('click', function (e) {
         // Check if the clicked element is a table cell with data-target
         if (e.target.closest('.tense-cell[data-target]')) {
             const cell = e.target.closest('.tense-cell[data-target]');
             const targetTense = cell.getAttribute('data-target');
-            
-            console.log('Delegated click on cell with target:', targetTense);
-            
-            const targetCard = document.querySelector(`.tense-card[data-tense="${targetTense}"]`);
-            console.log('Found target card:', targetCard);
-            
-            if (targetCard) {
-                console.log('Scrolling to target card');
-                
-                // Add highlight effect
-                targetCard.style.animation = 'pulse 0.6s ease-in-out';
-                
-                // Scroll to the target card with smooth behavior
-                // Add small delay for mobile devices to ensure proper rendering
-                setTimeout(() => {
-                    targetCard.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }, 50);
-                
-                // Remove animation after it completes
-                setTimeout(() => {
-                    targetCard.style.animation = '';
-                }, 600);
-                
-                // Add temporary highlight
-                targetCard.classList.add('highlighted-card');
-                setTimeout(() => {
-                    targetCard.classList.remove('highlighted-card');
-                }, 2000);
-            } else {
-                console.log('Target card not found for:', targetTense);
-            }
-        }
-    });
-    
-    // Add touch event support for mobile devices
-    document.addEventListener('touchend', function(e) {
-        // Check if the touched element is a table cell with data-target
-        if (e.target.closest('.tense-cell[data-target]')) {
-            e.preventDefault();
-            const cell = e.target.closest('.tense-cell[data-target]');
-            const targetTense = cell.getAttribute('data-target');
-            
-            console.log('Delegated touch on cell with target:', targetTense);
-            
-            const targetCard = document.querySelector(`.tense-card[data-tense="${targetTense}"]`);
-            console.log('Found target card:', targetCard);
-            
-            if (targetCard) {
-                console.log('Scrolling to target card');
-                
-                // Add highlight effect
-                targetCard.style.animation = 'pulse 0.6s ease-in-out';
-                
-                // Scroll to the target card with smooth behavior
-                // Add small delay for mobile devices to ensure proper rendering
-                setTimeout(() => {
-                    targetCard.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }, 50);
-                
-                // Remove animation after it completes
-                setTimeout(() => {
-                    targetCard.style.animation = '';
-                }, 600);
-                
-                // Add temporary highlight
-                targetCard.classList.add('highlighted-card');
-                setTimeout(() => {
-                    targetCard.classList.remove('highlighted-card');
-                }, 2000);
-            } else {
-                console.log('Target card not found for:', targetTense);
-            }
+
+            // Check if we need to prevent this based on recent touch scroll? 
+            // Browsers usually don't fire click if touchmove happened, but some might.
+            // The per-element listener handles this better.
+
+            // Rely on the direct listener for now.
         }
     });
 }
 
 // Initialize table scroll functionality
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     console.log('DOM loaded, initializing table scroll functionality');
-    
+
     // Add a small delay to ensure all elements are rendered
     setTimeout(() => {
         addTableScrollFunctionality();
         addTableScrollFunctionalityDelegated(); // Add the delegated approach as backup
         addHighlightAnimation();
-        
+
         // Test if the functionality is working
         console.log('Testing table scroll functionality...');
         const testCell = document.querySelector('.tense-cell[data-target]');

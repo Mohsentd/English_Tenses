@@ -5,6 +5,9 @@ const examples = document.querySelectorAll('.example');
 // Add click functionality to focus examples (no copy)
 function addCopyFunctionality() {
     tenseCells.forEach(cell => {
+        // Skip if the cell is meant for navigation (has data-target)
+        if (cell.hasAttribute('data-target')) return;
+
         const ex = cell.querySelector('.example');
         if (!ex) return;
         ex.style.cursor = 'zoom-in';
@@ -21,7 +24,7 @@ function addCopyFunctionality() {
         cell.setAttribute('tabindex', '0');
         cell.setAttribute('role', 'button');
         cell.setAttribute('aria-label', 'Click to focus example');
-        cell.addEventListener('keydown', function(e) {
+        cell.addEventListener('keydown', function (e) {
             if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showSpotlight(); }
         });
     });
@@ -30,10 +33,10 @@ function addCopyFunctionality() {
 // Add hover effects and tense information
 function addHoverEffects() {
     tenseCells.forEach(cell => {
-        cell.addEventListener('mouseenter', function() {
+        cell.addEventListener('mouseenter', function () {
             const tense = this.getAttribute('data-tense');
             const tenseInfo = getTenseInfo(tense);
-            
+
             // Create tooltip
             const tooltip = document.createElement('div');
             tooltip.className = 'tense-tooltip';
@@ -57,12 +60,12 @@ function addHoverEffects() {
                     <small>${tenseInfo.description}</small>
                 </div>
             `;
-            
+
             this.style.position = 'relative';
             this.appendChild(tooltip);
         });
-        
-        cell.addEventListener('mouseleave', function() {
+
+        cell.addEventListener('mouseleave', function () {
             const tooltip = this.querySelector('.tense-tooltip');
             if (tooltip) {
                 tooltip.remove();
@@ -123,7 +126,7 @@ function getTenseInfo(tense) {
             description: 'Actions ongoing up to specific future time'
         }
     };
-    
+
     return tenseInfo[tense] || { name: 'Unknown Tense', description: 'No description available' };
 }
 
@@ -151,23 +154,23 @@ function addThemeToggle() {
         font-size: 1.2rem;
         color: #2d3748;
     `;
-    
-    themeToggle.addEventListener('click', function() {
+
+    themeToggle.addEventListener('click', function () {
         document.body.classList.toggle('dark-theme');
         const isDark = document.body.classList.contains('dark-theme');
         this.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-        
+
         // Save theme preference
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
     });
-    
+
     // Load saved theme
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
         document.body.classList.add('dark-theme');
         themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
     }
-    
+
     document.body.appendChild(themeToggle);
 }
 
@@ -194,32 +197,32 @@ function addPrintFunctionality() {
         align-items: center;
         gap: 8px;
     `;
-    
-    printButton.addEventListener('click', function() {
+
+    printButton.addEventListener('click', function () {
         window.print();
     });
-    
-    printButton.addEventListener('mouseenter', function() {
+
+    printButton.addEventListener('mouseenter', function () {
         this.style.transform = 'translateY(-2px)';
         this.style.boxShadow = '0 6px 20px rgba(0, 0, 0, 0.2)';
     });
-    
-    printButton.addEventListener('mouseleave', function() {
+
+    printButton.addEventListener('mouseleave', function () {
         this.style.transform = 'translateY(0)';
         this.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.15)';
     });
-    
+
     document.body.appendChild(printButton);
 }
 
 // Add keyboard navigation
 function addKeyboardNavigation() {
     let currentCellIndex = 0;
-    
-    document.addEventListener('keydown', function(e) {
+
+    document.addEventListener('keydown', function (e) {
         const cells = Array.from(tenseCells);
-        
-        switch(e.key) {
+
+        switch (e.key) {
             case 'ArrowRight':
                 e.preventDefault();
                 currentCellIndex = Math.min(currentCellIndex + 1, cells.length - 1);
@@ -260,8 +263,8 @@ function addScrollAnimations() {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
     };
-    
-    const observer = new IntersectionObserver(function(entries) {
+
+    const observer = new IntersectionObserver(function (entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.style.opacity = '1';
@@ -269,7 +272,7 @@ function addScrollAnimations() {
             }
         });
     }, observerOptions);
-    
+
     // Observe table cells
     tenseCells.forEach((cell, index) => {
         cell.style.opacity = '0';
@@ -282,23 +285,23 @@ function addScrollAnimations() {
 // Add tense highlighting
 function addTenseHighlighting() {
     tenseCells.forEach(cell => {
-        cell.addEventListener('click', function() {
+        cell.addEventListener('click', function () {
             // Remove previous highlights
             tenseCells.forEach(c => c.classList.remove('highlighted'));
-            
+
             // Add highlight to current cell
             this.classList.add('highlighted');
-            
+
             // Add highlight to same tense in other time periods
             const tense = this.getAttribute('data-tense');
             const aspect = tense.split('-').slice(1).join('-');
-            
+
             tenseCells.forEach(c => {
                 if (c.getAttribute('data-tense').includes(aspect)) {
                     c.classList.add('related-highlight');
                 }
             });
-            
+
             // Remove highlights after 3 seconds
             setTimeout(() => {
                 tenseCells.forEach(c => {
@@ -336,9 +339,9 @@ function addHighlightStyles() {
 // Add analytics tracking
 function trackUsage() {
     let clickCount = 0;
-    
+
     tenseCells.forEach(cell => {
-        cell.addEventListener('click', function() {
+        cell.addEventListener('click', function () {
             clickCount++;
             const tense = this.getAttribute('data-tense');
             console.log(`User clicked on: ${tense} (Total clicks: ${clickCount})`);
@@ -347,7 +350,7 @@ function trackUsage() {
 }
 
 // Initialize all functionality
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     addCopyFunctionality();
     addHoverEffects();
     addThemeToggle();
@@ -357,10 +360,10 @@ document.addEventListener('DOMContentLoaded', function() {
     addTenseHighlighting();
     addHighlightStyles();
     trackUsage();
-    
+
     // Add smooth scrolling for better UX
     document.documentElement.style.scrollBehavior = 'smooth';
-    
+
     // Add loading animation
     document.body.style.opacity = '0';
     setTimeout(() => {
@@ -370,11 +373,11 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Add error handling
-window.addEventListener('error', function(e) {
+window.addEventListener('error', function (e) {
     console.error('An error occurred:', e.error);
 });
 
 // Add unhandled promise rejection handling
-window.addEventListener('unhandledrejection', function(e) {
+window.addEventListener('unhandledrejection', function (e) {
     console.error('Unhandled promise rejection:', e.reason);
 });
